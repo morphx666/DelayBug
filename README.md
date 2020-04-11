@@ -3,7 +3,7 @@
 
 I recently started working on a project which requires a task/thread to run as fast as possible, without hogging the CPU.
 
-To accomplish this I used a Thread.Sleep statement with a delay of 2 milliseconds.
+To accomplish this I used a `Thread.Sleep` statement with a delay of 2 milliseconds.
 
 Everything worked just fine until I ran the program directly (outside of VS).
 Sometimes the program worked fine, others it presented some serious lag and stuttering.

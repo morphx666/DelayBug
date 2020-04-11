@@ -16,7 +16,7 @@ Here's a summarized output of the tests performed with the sample program, which
 
                       |                        Windows                        |          Linux            |
                       |-------------------------------------------------------|---------------------------|
-                      |          VS OFF           |          VS ON            |    mono    |    dotnet    |
+                      | Visual Studio NOT running |   Visual Studio running   |    mono    |    dotnet    |
                       |---------------------------|---------------------------|------------|--------------|
                       |  .NET 4.8  |  NetCore 3.1 |  .NET 4.8  |  NetCore 3.1 |  .NET 4.8  |  NetCore 3.1 |
     ------------------|------------|--------------|------------|--------------|------------|--------------|

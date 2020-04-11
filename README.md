@@ -14,6 +14,8 @@ So I created a small and simple application that can be used to verify this beha
 
 Here's a summarized output of the tests performed with the sample program, which clearly illustrate the problem (under Windows).
 
+*Ideally*, every single result should have returned `"1.0000"`.
+
                       |                        Windows                        |          Linux            |
                       |-------------------------------------------------------|---------------------------|
                       | Visual Studio NOT running |   Visual Studio running   |    mono    |    dotnet    |
@@ -50,8 +52,6 @@ The code in the Test app tries to calculate the exact value of a millisecond usi
     return accTicks * mspt / (delay * iters);
 
 Where `mstp` is the number of milliseconds per tick, `delay` is the delay in milliseconds (in this example is set to 2) and `iters` is the number of times the code is executed.
-
-*Ideally*, every single result should have returned `"1.0000"`.
 
 Seeing that, for example, under Windows without running VS the delay took up to 8 times more than it should have seems to indicate a serious issue with the Delay/Sleep implementation.
 

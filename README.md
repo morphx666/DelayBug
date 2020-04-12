@@ -34,7 +34,7 @@ Here's a summarized output of the tests performed with the sample program, which
     Triggered by Timer|            |              |            |              |            |              |
     -------------------------------------------------------------------------------------------------------
 
-The code in the Test app tries to calculate the exact value of a millisecond using this code:
+The Test app tries to calculate the exact value of a millisecond using this code:
 
     Task.Run(() => {
         long curTick = DateTime.Now.Ticks;

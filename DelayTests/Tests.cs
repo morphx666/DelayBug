@@ -26,6 +26,7 @@ namespace DelayTests {
 
             Console.WriteLine($"Initializing for configuration:");
             Console.WriteLine($"    * Platform: {Environment.OSVersion.VersionString}");
+            Console.WriteLine($"                {(Environment.Is64BitOperatingSystem ? "x64" : "x86")} / {Environment.ProcessorCount} cores");
             Console.WriteLine($"    * Framework: {framework} {(Type.GetType("System.MonoType") == null ? "" : " (Mono)")}");
             Console.WriteLine($"    * {TimeSpan.TicksPerMillisecond:N0} ms/tick");
             Console.WriteLine($"    * Delay: {delay:N0} ms");
@@ -33,7 +34,7 @@ namespace DelayTests {
             Console.WriteLine($"    * Visual Studio is {(Process.GetProcessesByName("devenv").Length > 0 ? "" : "not ")}running\n");
 
             for(int i = 0; i < tests.Length; i++) {
-                Console.WriteLine($"Running test #{i + 1}: {tests[i].Name}\n");
+                Console.WriteLine($"Running test {i + 1}/{tests.Length}: {tests[i].Name}\n");
                 if(tests[i].useTimer) tmr.Change(0, delay);
                 Console.WriteLine($"    1 ms ~ {RunTest(tests[i].Method):N4} ms\n");
                 if(tests[i].useTimer) tmr.Change(Timeout.Infinite, Timeout.Infinite);

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace DelayTests {
     public class Tests {
-        private const int iters = 5000;
-        private const int delay = 2;
         private const double mspt = 1.0 / TimeSpan.TicksPerMillisecond;
+        private static int iters = 5000;
+        private static int delay = 2;
 
         private delegate void DelayMethod();
 
@@ -35,12 +35,15 @@ namespace DelayTests {
             for(int i = 0; i < tests.Length; i++) {
                 Console.WriteLine($"Starting test #{i + 1}: {tests[i].Name}\n");
                 if(tests[i].useTimer) tmr.Change(0, delay);
-                Console.WriteLine($"    1ms = {RunTest(tests[i].Method):N4} ms\n");
+                Console.WriteLine($"    1 ms ~ {RunTest(tests[i].Method):N4} ms\n");
                 if(tests[i].useTimer) tmr.Change(Timeout.Infinite, Timeout.Infinite);
             }
 
             tmr.Dispose();
 
+            FindMinimumDelay();
+
+            Console.WriteLine("Done");
             Console.ReadKey(true);
         }
 
@@ -64,6 +67,20 @@ namespace DelayTests {
 
             Console.CursorLeft = 0;
             return accTicks * mspt / (delay * iters);
+        }
+
+        private static void FindMinimumDelay() {
+            Console.WriteLine("Testing minimum reliable Thread.Sleep(delay) for this platform:");
+
+            iters = 1000;
+            delay = 1;
+            while(true) {
+                double r = RunTest(tests[0].Method);
+                double err = Math.Abs(1.0 - r) / ((1.0 + r) / 2.0) * 100.0;
+                Console.WriteLine($"    For {delay,2}ms the error is {err,7:N2}% {(err < 40 ? " √\n" : "")}");
+                if(err <= 40) break;
+                delay++;
+            }
         }
     }
 }
